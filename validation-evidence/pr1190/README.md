@@ -47,3 +47,14 @@ The DuckDB E2E run exercised the real backend and mock LLM using the E2E portion
 **Scope limitations:** PostgreSQL end-to-end and PostgreSQL-specific recovery validation were not rerun against this exact commit because `ATLAS_TEST_POSTGRES_URL` was not configured. Earlier PostgreSQL evidence remains archived separately above.
 
 The logs have been screened for common sensitive-data patterns, and local user-directory paths have been redacted. These are contributor-run validations, not GitHub Actions results or maintainer approval.
+
+## Final review-fix validation — November 24, 2026
+
+Commit: `eedf60885494ab1d39d8708bb0d2a203ad0e4c6e`
+
+| Validation | Result | Evidence |
+|---|---|---|
+| Frontend Vitest | 157 files, 2,067 tests passed; exit 0 | [Frontend log](nov24-eedf6088-frontend.log) |
+| Backend pytest | 6,275 passed, 44 skipped; exit 0 | [Backend log](nov24-eedf6088-backend.log) |
+
+These logs were captured against the final review-fix commit. The backend run excludes the environment-sensitive logging test, which was validated separately on an earlier commit. The previously archived DuckDB E2E results also belong to an earlier commit and are not represented as final-commit results.
