@@ -1,0 +1,81 @@
+Sandia PR #1190 — DuckDB E2E Validation
+Commit: 2ef84f314d9316d24dd26b0b78417d6b10675942
+Date (UTC): Tue Nov 24 13:45:35 UTC 2026
+Command: bash pr1169-duckdb-e2e.sh
+----------------------------------------
+=== End-to-end (duckdb): real backend + mock LLM ===
+PASSED: owner creates a private prompt
+PASSED: new prompt is private (member gets 404)
+PASSED: owner publishes v1
+PASSED: sharing into a group the owner is not in is refused
+PASSED: sharing with the everyone group is refused
+PASSED: owner shares with group eng
+PASSED: sharing targets are the owner's checked groups, reported complete
+PASSED: a sharing change based on a stale revision is refused
+PASSED: member sees it under Team
+PASSED: member has use permission and no sharing details
+PASSED: group membership does not grant edit
+PASSED: outsider search finds nothing
+PASSED: outsider cannot tell a real id from a guessed one
+PASSED: member's chat runs v1, resolved server-side
+PASSED: the platform system prompt stays the system message, followed by the precedence notice
+PASSED: conversation records the pinned version
+PASSED: a stale draft save is refused
+PASSED: publishing a draft revision nobody reviewed is refused
+PASSED: owner publishes v2
+PASSED: v1 is unchanged after v2 is published
+PASSED: existing conversation keeps v1 after v2 is published
+PASSED: a new conversation runs v2
+PASSED: crafted frame refused: outsider naming the shared prompt
+PASSED: crafted frame refused: outsider naming a version id
+PASSED: a team prompt plus another prompt is rejected (member, inline text)
+PASSED: a team prompt plus another prompt is rejected (member, persona)
+PASSED: a team prompt plus another prompt is rejected (outsider, inline text)
+PASSED: a rejected conflicting frame audits no use or denial
+PASSED: no refused turn reached the model
+PASSED: open session pins v1
+PASSED: pin cleared while the session stays open
+PASSED: the open session's next turn runs unpinned
+PASSED: the open session's save did not restore the cleared pin (set = 1, clear = 2)
+PASSED: conversation_saved reports the pin revision (1)
+PASSED: tab B re-pins to v2 from revision 1
+PASSED: tab B's conversation_saved reports the stored pin (v2, revision 2)
+PASSED: tab A's stale change is refused with the stored pin, and nothing ran
+PASSED: the conflict frame names the conversation it belongs to
+PASSED: tab A's stale explicit clear (library_prompt: null) is refused too
+PASSED: after catching up, tab A's explicit clear applies
+PASSED: the stored pin went v1 -> v2 -> cleared, one revision each
+PASSED: a save returns exactly the draft it wrote
+PASSED: version history is paged and carries no prompt text
+PASSED: publishing the saved revision after another save is refused
+PASSED: after unsharing, continuing the pinned conversation is refused
+PASSED: the refusal offers the owner's clear, for that conversation (browser recovery)
+PASSED: history keeps its pinned reference after revocation
+PASSED: a client that cannot pick a prompt is told how to clear the pin
+PASSED: only the conversation owner can clear its pin
+PASSED: a clear naming a revision the pin no longer has is refused (409), nothing cleared
+PASSED: the 409 carries the stored pin and revision, so the browser shows it before a retry
+PASSED: the owner clears the unavailable pin
+PASSED: after clearing, a legacy-style turn continues with the default prompt
+PASSED: the pin history still records v1
+PASSED: repeated refused uses by one user are one counted audit row
+PASSED: management events stay reachable on their own page
+PASSED: a pin change sends prompt_pin_state with the stored revision before the turn ends
+PASSED: the next change on the reported revision is not a false conflict
+PASSED: member forks v1 into a private copy
+PASSED: the fork is private to the member
+PASSED: audit trail records create/publish/share/update/use/denied/unpin/fork
+PASSED: audit trail holds no prompt text
+PASSED: audit trail needs manage permission
+NOTE: damaged-metadata recovery checks need a PostgreSQL database URL; skipped
+
+library_e2e: 63 passed, 0 failed
+=== Prompt text never reaches the server logs (duckdb) ===
+PASSED: no prompt text in server logs (duckdb)
+NOTE: ATLAS_TEST_POSTGRES_URL not set; the PostgreSQL end-to-end run (and its recovery checks) was skipped.
+PASSED: DuckDB end-to-end validation phase
+Exit code: 0
+
+Saving session...
+...saving history...truncating history files...
+...completed.

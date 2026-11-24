@@ -26,3 +26,24 @@ These final-branch results were provided as **Terminal summaries**, not newly up
 ## Evidence handling
 
 The archived logs include test names, synthetic URLs, and dummy fixture credentials as exercised by the public test suite. They are not production credential exports. This branch holds evidence only and does **not** change PR #1190's head/source branch.
+
+## November 24, 2026 — Exact-commit validation
+
+**Source commit:** `2ef84f314d9316d24dd26b0b78417d6b10675942`
+
+These tests were executed locally on macOS against the exact commit above. The linked logs are redacted copies of the recorded terminal output; original logs are retained locally.
+
+| Validation | Evidence | Result |
+| --- | --- | --- |
+| Full frontend Vitest | [Frontend log](nov24-2ef84f31-frontend.log) | 157 files, 2,064 tests passed; exit 0 |
+| Backend pytest | [Backend log](nov24-2ef84f31-backend.log) | 6,272 passed, 44 skipped; exit 0 |
+| Separately executed logging test | [Logging test](nov24-2ef84f31-isolated-logging-test.log) | 1 passed; exit 0 |
+| DuckDB end-to-end | [E2E log](nov24-2ef84f31-duckdb-e2e.log) | 63 passed, 0 failed; exit 0 |
+
+The backend suite excluded `test_empty_reply_carries_diagnostics_and_is_logged`, which passed separately with the logging configuration recorded in its log.
+
+The DuckDB E2E run exercised the real backend and mock LLM using the E2E portion of the repository's PR #1169 validation script. Its server-log prompt-text leakage check passed.
+
+**Scope limitations:** PostgreSQL end-to-end and PostgreSQL-specific recovery validation were not rerun against this exact commit because `ATLAS_TEST_POSTGRES_URL` was not configured. Earlier PostgreSQL evidence remains archived separately above.
+
+The logs have been screened for common sensitive-data patterns, and local user-directory paths have been redacted. These are contributor-run validations, not GitHub Actions results or maintainer approval.

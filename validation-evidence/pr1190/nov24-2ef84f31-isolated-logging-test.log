@@ -1,0 +1,17 @@
+Sandia PR #1190 — Isolated Logging Test
+Commit: 2ef84f314d9316d24dd26b0b78417d6b10675942
+Date (UTC): Tue Nov 24 13:38:39 UTC 2026
+----------------------------------------
+.                                                                        [100%]
+=============================== warnings summary ===============================
+tests/test_admin_mcp_server_management_routes.py:7
+  /Users/REDACTED/Downloads/atlas-ui-3/atlas/tests/test_admin_mcp_server_management_routes.py:7: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+1 passed, 6316 deselected, 1 warning in 3.47s
+Exit code: 0
+
+Saving session...
+...saving history...truncating history files...
+...completed.
