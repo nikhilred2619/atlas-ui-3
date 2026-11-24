@@ -1,0 +1,77 @@
+### started 2026-11-13T16:36:28Z
+### server: PostgreSQL 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1) on x86_64-pc-linux-gn
+### commit ab2fe60b + working tree (final)
+$ ATLAS_TEST_POSTGRES_URL=postgresql://atlas@127.0.0.1:55432/postgres .venv/bin/python -m pytest -v -p no:warnings atlas/tests/test_conversation_prompt_pin.py atlas/tests/test_prompt_library_concurrency.py atlas/tests/test_prompt_library_migration.py atlas/tests/test_prompt_library_storage.py
+============================= test session starts ==============================
+platform linux -- Python 3.13.18, pytest-9.2.0, pluggy-1.7.0 -- /home/claude/atlas-ui-3/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /home/claude/atlas-ui-3
+configfile: pyproject.toml
+plugins: mock-3.17.0, xdist-3.8.0, anyio-4.16.0, platformdirs-4.14.5, asyncio-1.4.1.post1
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 61 items
+
+atlas/tests/test_conversation_prompt_pin.py::test_a_save_of_an_existing_record_never_changes_the_pin PASSED [  1%]
+atlas/tests/test_conversation_prompt_pin.py::test_a_new_record_takes_the_creating_sessions_pin PASSED [  3%]
+atlas/tests/test_conversation_prompt_pin.py::test_compare_and_set_applies_only_on_the_expected_revision PASSED [  4%]
+atlas/tests/test_conversation_prompt_pin.py::test_revisions_read_defensively[None-0] PASSED [  6%]
+atlas/tests/test_conversation_prompt_pin.py::test_revisions_read_defensively[-1-0] PASSED [  8%]
+atlas/tests/test_conversation_prompt_pin.py::test_revisions_read_defensively[3-0] PASSED [  9%]
+atlas/tests/test_conversation_prompt_pin.py::test_revisions_read_defensively[True-0] PASSED [ 11%]
+atlas/tests/test_conversation_prompt_pin.py::test_revisions_read_defensively[1.5-0] PASSED [ 13%]
+atlas/tests/test_conversation_prompt_pin.py::test_revisions_read_defensively[7-7] PASSED [ 14%]
+atlas/tests/test_conversation_prompt_pin.py::test_the_earlier_epoch_key_reads_as_the_revision PASSED [ 16%]
+atlas/tests/test_conversation_prompt_pin.py::test_pin_changes_are_compare_and_set_and_saves_cannot_undo_them PASSED [ 18%]
+atlas/tests/test_conversation_prompt_pin.py::test_owner_clear_is_unconditional_and_owner_scoped PASSED [ 19%]
+atlas/tests/test_conversation_prompt_pin.py::test_concurrent_changes_on_duckdb_never_both_apply PASSED [ 21%]
+atlas/tests/test_conversation_prompt_pin.py::test_unreadable_metadata_raises_and_is_never_rewritten[{not json] PASSED [ 22%]
+atlas/tests/test_conversation_prompt_pin.py::test_unreadable_metadata_raises_and_is_never_rewritten[[1, 2]] PASSED [ 24%]
+atlas/tests/test_conversation_prompt_pin.py::test_unreadable_metadata_raises_and_is_never_rewritten["text"] PASSED [ 26%]
+atlas/tests/test_conversation_prompt_pin.py::test_unreadable_metadata_raises_and_is_never_rewritten[42] PASSED [ 27%]
+atlas/tests/test_conversation_prompt_pin.py::test_genuinely_empty_metadata_reads_as_empty[None] PASSED [ 29%]
+atlas/tests/test_conversation_prompt_pin.py::test_genuinely_empty_metadata_reads_as_empty[] PASSED [ 31%]
+atlas/tests/test_conversation_prompt_pin.py::test_genuinely_empty_metadata_reads_as_empty[null] PASSED [ 32%]
+atlas/tests/test_conversation_prompt_pin.py::test_genuinely_empty_metadata_reads_as_empty[{}] PASSED [ 34%]
+atlas/tests/test_conversation_prompt_pin.py::test_two_replicas_selecting_different_versions_have_one_winner_postgresql PASSED [ 36%]
+atlas/tests/test_conversation_prompt_pin.py::test_a_pin_set_survives_racing_stale_saves_postgresql PASSED [ 37%]
+atlas/tests/test_conversation_prompt_pin.py::test_a_save_waits_for_an_in_flight_pin_change_postgresql PASSED [ 39%]
+atlas/tests/test_conversation_prompt_pin.py::test_an_explicit_clear_and_a_stale_set_race_postgresql PASSED [ 40%]
+atlas/tests/test_prompt_library_concurrency.py::test_concurrent_publication_duckdb PASSED [ 42%]
+atlas/tests/test_prompt_library_concurrency.py::test_concurrent_publication_across_replicas_postgresql PASSED [ 44%]
+atlas/tests/test_prompt_library_concurrency.py::test_concurrent_sharing_updates_have_one_winner[duckdb] PASSED [ 45%]
+atlas/tests/test_prompt_library_concurrency.py::test_concurrent_sharing_updates_have_one_winner[postgresql] PASSED [ 47%]
+atlas/tests/test_prompt_library_concurrency.py::test_stale_sharing_update_cannot_restore_a_revoked_grant[duckdb] PASSED [ 49%]
+atlas/tests/test_prompt_library_concurrency.py::test_stale_sharing_update_cannot_restore_a_revoked_grant[postgresql] PASSED [ 50%]
+atlas/tests/test_prompt_library_concurrency.py::test_sharing_waits_on_the_postgresql_row_lock PASSED [ 52%]
+atlas/tests/test_prompt_library_concurrency.py::test_grant_changes_are_diffs_under_the_unique_constraint[duckdb] PASSED [ 54%]
+atlas/tests/test_prompt_library_concurrency.py::test_grant_changes_are_diffs_under_the_unique_constraint[postgresql] PASSED [ 55%]
+atlas/tests/test_prompt_library_concurrency.py::test_concurrent_editors_cannot_overwrite_each_other[duckdb] PASSED [ 57%]
+atlas/tests/test_prompt_library_concurrency.py::test_concurrent_editors_cannot_overwrite_each_other[postgresql] PASSED [ 59%]
+atlas/tests/test_prompt_library_concurrency.py::test_publish_requires_the_reviewed_draft[duckdb] PASSED [ 60%]
+atlas/tests/test_prompt_library_concurrency.py::test_publish_requires_the_reviewed_draft[postgresql] PASSED [ 62%]
+atlas/tests/test_prompt_library_concurrency.py::test_save_and_publish_never_publishes_another_editors_unseen_save[duckdb] PASSED [ 63%]
+atlas/tests/test_prompt_library_concurrency.py::test_save_and_publish_never_publishes_another_editors_unseen_save[postgresql] PASSED [ 65%]
+atlas/tests/test_prompt_library_concurrency.py::test_save_snapshot_is_read_under_the_postgresql_row_lock PASSED [ 67%]
+atlas/tests/test_prompt_library_migration.py::test_migration_is_additive_and_preserves_existing_data_sqlite PASSED [ 68%]
+atlas/tests/test_prompt_library_migration.py::test_migration_on_postgresql PASSED [ 70%]
+atlas/tests/test_prompt_library_storage.py::test_transient_conflict_classification[exc0-None-True] PASSED [ 72%]
+atlas/tests/test_prompt_library_storage.py::test_transient_conflict_classification[exc1-None-True] PASSED [ 73%]
+atlas/tests/test_prompt_library_storage.py::test_transient_conflict_classification[exc2-None-True] PASSED [ 75%]
+atlas/tests/test_prompt_library_storage.py::test_transient_conflict_classification[exc3-uq_prompt_library_version_number-True] PASSED [ 77%]
+atlas/tests/test_prompt_library_storage.py::test_transient_conflict_classification[exc4-uq_prompt_library_version_number-False] PASSED [ 78%]
+atlas/tests/test_prompt_library_storage.py::test_transient_conflict_classification[exc5-uq_prompt_library_version_number-True] PASSED [ 80%]
+atlas/tests/test_prompt_library_storage.py::test_transient_conflict_classification[exc6-uq_prompt_library_version_number-False] PASSED [ 81%]
+atlas/tests/test_prompt_library_storage.py::test_transient_conflict_classification[exc7-uq_prompt_library_version_number-False] PASSED [ 83%]
+atlas/tests/test_prompt_library_storage.py::test_transient_conflict_classification[exc8-uq_prompt_library_version_number-False] PASSED [ 85%]
+atlas/tests/test_prompt_library_storage.py::test_publish_retries_transient_conflicts_then_raises_a_typed_error PASSED [ 86%]
+atlas/tests/test_prompt_library_storage.py::test_publish_does_not_retry_unrelated_failures PASSED [ 88%]
+atlas/tests/test_prompt_library_storage.py::test_database_errors_never_leak_into_logs[create_prompt-args0] PASSED [ 90%]
+atlas/tests/test_prompt_library_storage.py::test_database_errors_never_leak_into_logs[update_prompt-args1] PASSED [ 91%]
+atlas/tests/test_prompt_library_storage.py::test_database_errors_never_leak_into_logs[replace_grants-args2] PASSED [ 93%]
+atlas/tests/test_prompt_library_storage.py::test_database_errors_never_leak_into_logs[add_audit_event-args3] PASSED [ 95%]
+atlas/tests/test_prompt_library_storage.py::test_database_errors_never_leak_into_logs[page_prompts-args4] PASSED [ 96%]
+atlas/tests/test_prompt_library_storage.py::test_service_maps_storage_errors_to_safe_typed_errors PASSED [ 98%]
+atlas/tests/test_prompt_library_storage.py::test_slow_storage_does_not_block_the_event_loop PASSED [100%]
+
+============================== 61 passed in 9.00s ==============================
+### finished 2026-11-13T16:36:42Z exit=0
